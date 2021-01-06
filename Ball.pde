@@ -16,6 +16,11 @@ class Ball{
  }
  void move(){
     push();
+    // check if balls collide with black line , then apply bouncing
+    if(get(int(x)+5,int(y)+5)==color(0,0,0)){  
+     speedx  = speedx * - 1;
+     speedy  = speedy * - 1;
+  }
     //  check boundry of screen to change direction
    if((x > width) || (x <0)){ 
      speedx  = speedx * - 1;
