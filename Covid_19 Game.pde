@@ -27,6 +27,9 @@ void draw()
   {
     //game started
     background(255);
+    strokeWeight(10);
+    stroke(0);
+    point(500,300);
    for (int i=0; i< lines.size();i++){
        lines.get(i).move();
  if(dist(mouseX,mouseY,lines.get(i).x,lines.get(i).y)<40&&keyPressed&& key == ' '){lines.remove(i);i--;}
