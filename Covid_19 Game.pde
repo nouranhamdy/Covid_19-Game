@@ -29,7 +29,7 @@ void draw()
     background(255);
    for (int i=0; i< lines.size();i++){
        lines.get(i).move();
- // if(dist(mouseX,mouseY,lines.get(i).x,lines.get(i).y)<40&&mousePressed&& keyCode == 32){lines.remove(i);i--;}
+ if(dist(mouseX,mouseY,lines.get(i).x,lines.get(i).y)<40&&keyPressed&& key == ' '){lines.remove(i);i--;}
 }
 for (int i=0; i< balls.length;i++){
         balls[i].move();
