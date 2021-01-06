@@ -3,7 +3,7 @@ PImage background;
 boolean isStartPage = false;
 Ball[] balls = new Ball[50];
 ArrayList<Line> lines   = new ArrayList(); 
-float t=0;
+
 void setup(){
   size(1000,1000);
   textSize(20);
@@ -37,7 +37,7 @@ for (int i=0; i< balls.length;i++){
 }
 }
  
-  if(keyPressed&& keyCode ==32){x=0;y=0;}
+  
   push();
   strokeWeight(30);
 if(mousePressed){ lines.add(new Line(mouseX,mouseY,pmouseX,pmouseY));}
