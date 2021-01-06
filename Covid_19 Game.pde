@@ -4,10 +4,6 @@ boolean isStartPage = false;
 Ball[] balls = new Ball[50];
 ArrayList<Line> lines   = new ArrayList(); 
 float t=0;
-int x=100;
-int y=100;
-int yspeed=5;
-int xspeed=5;
 void setup(){
   size(1000,1000);
   textSize(20);
@@ -40,14 +36,10 @@ for (int i=0; i< balls.length;i++){
   
 }
 }
-  x+=xspeed;
-  y+=yspeed;
+ 
   if(keyPressed&& keyCode ==32){x=0;y=0;}
   push();
-  if(get(x+xspeed*2,y)==0){xspeed=-xspeed;}
-  if(get(x,y+yspeed*2)==0){yspeed=-yspeed;}
-  
-   strokeWeight(30);
+  strokeWeight(30);
 if(mousePressed){ lines.add(new Line(mouseX,mouseY,pmouseX,pmouseY));}
   pop();
   
