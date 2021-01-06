@@ -17,6 +17,10 @@ class Ball{
  void move(){
     push();
     //  check boundry of screen to change direction
+   if(get(int(x)+15,int(y)+15)==get(500,300)){  
+     speedx  = speedx * - 1;
+     speedy  = speedy * - 1;
+  }
    if((x > width) || (x <0)){ 
      speedx  = speedx * - 1;
    }
