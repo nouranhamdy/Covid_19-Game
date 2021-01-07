@@ -3,7 +3,6 @@ PImage background;
 boolean isStartPage = false;
 Ball[] balls = new Ball[50];
 ArrayList<Line> lines   = new ArrayList(); 
-
 void setup(){
   size(1000,1000);
   textSize(20);
@@ -25,22 +24,27 @@ void draw()
     background(255);
    for (int i=0; i< lines.size();i++){
        lines.get(i).move();
- if(dist(mouseX,mouseY,lines.get(i).x,lines.get(i).y)<40&&keyPressed&& key == ' '){lines.remove(i);i--;}
+  if(dist(mouseX,mouseY,lines.get(i).x,lines.get(i).y)<70&&keyPressed &&key == ' '){lines.remove(i);i--;}
 }
+
+
 for (int i=0; i< balls.length;i++){
         balls[i].move();
+        
       for (int j=0; j<balls.length;j++){
+        
          float d=dist(balls[i].x,balls[i].y,balls[j].x,balls[j].y);
+         
          if(d<20 && i!= j){if(balls[i].inf&&!balls[j].inf&&round(random(50))==1){balls[j].inf=true;}}
+         
          if(d<20 &&i!= j){if(balls[j].inf&&!balls[i].inf&&round(random(50))==1){balls[i].inf=true;}}
   
+      }
 }
-}
- 
   
   push();
   strokeWeight(30);
-if(mousePressed){ lines.add(new Line(mouseX,mouseY,pmouseX,pmouseY));}
+if(mousePressed){lines.add(new Line(mouseX,mouseY,pmouseX,pmouseY));}
   pop();
   
   }
