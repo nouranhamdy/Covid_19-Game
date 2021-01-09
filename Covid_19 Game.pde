@@ -1,15 +1,32 @@
 
 PImage background;
+PImage finish;
+PImage end;
 boolean isStartPage = false;
 Ball[] balls = new Ball[50];
 ArrayList<Line> lines   = new ArrayList(); 
+int healthy=0;
+int deadballs=0;
+float coX[], coY[];
+int fallingspeedY=7;
+
 void setup(){
   size(1000,1000);
   textSize(20);
   surface.setTitle("Coronavirus Game");
+  finish= loadImage("surgical-mask.png");
+  end=loadImage("sterilization4.jpg");
   background = loadImage("coronavirus.png");
   for(int i=0; i< balls.length;i++){
     balls[i] = new Ball(random(width),random(height));
+  }
+  
+  // array of x- & y-coordinates of the 80 masks
+  coX=new float[80];
+  coY=new float[80];
+  for (int i=0; i<80; i++) {
+    coX[i]=30*i;
+    coY[i]=random(0, 1000);
   }
 
 }
@@ -46,6 +63,25 @@ for (int i=0; i< balls.length;i++){
   strokeWeight(30);
 if(mousePressed){lines.add(new Line(mouseX,mouseY,pmouseX,pmouseY));}
   pop();
+  
+  // returns the varaibles to zero to avoid accumulative sum, due to draw infinite loop.
+    healthy=0;
+    cured=0;
+    deadballs=0;
+    for (int i=0; i< balls.length; i++) {
+      //for each draw iteration check #healthyballs and #deadballs 
+      if (balls[i].healthy) {
+        healthy++;
+      }
+      if (balls[i].dead) {
+        deadballs++;
+      }
+      // end the game whenever all non-dead balls are healthy.
+      if (healthy+deadballs==balls.length) {
+        background(255);
+        displayEnd();
+      }
+    }
   
   }
 
@@ -98,3 +134,25 @@ void start_Page()
 
 
 /////////////////////////////////////////////////////
+
+void displayEnd() {
+  background(255);
+  image(end, 100, 100, width-200, height-100);
+  fill(0, 0, 0);
+  textSize(70);
+  text("DONE!!  ALL IS CLEAN", 120, height-900);
+  for (int i=0; i<80; i++) {
+    image(finish, coX[i], coY[i], 70, 70);
+    if (coY[i]>height) {
+      coY[i]=0;
+    }
+  }
+  //change the y-coordinate of each mask to fall down.
+  for (int i=0; i<80; i++) {
+    coY[i]+=fallingspeedY;
+  }
+}
+
+
+/////////////////////////////////////////////////////
+
