@@ -4,6 +4,7 @@ class Ball{
  int time_to_recover=round(random(1000,3000)); // this variable is initialized ith some random number and if the ball is infected this counnter decreased each time draw is called until reach zero and ball is cured and turned yellow
  boolean dead=false;  // if ball dead it turn to black and do not move
  boolean movee=true; // check if ball move or stop
+ boolean healthy=true; //check whether the ball is healthy (green) or not
  boolean inf = (round(random(0,5))==1) ? true : false;  // check if ball infected or not
  int die =round(random(20)); // initialize die variable randomly
  float speedx = random(-1,1);  // speed in x_direction
@@ -32,12 +33,19 @@ class Ball{
    
    this.speedx+=random(-0.1,0.1);
     this.speedy+=random(-0.1,0.1);
-    // if ball is infected then change color to read otherwise change color to green
-  if(this.inf){fill(255,0,0);}else fill(0,255,0); 
+    // if ball is infected then change color to red otherwise change color to green
+  if(this.inf){fill(255,0,0); this.healthy=false ;}else fill(0,255,0); 
   // if ball is infected reduce time_to_recover by 1
 if(this.inf){this.time_to_recover--;} 
     // if time_to_recover less than zero , then ball is cured and its color is yellow
-    if(this.time_to_recover<=0){this.inf=false;fill(255,255,0);}
+    if(this.time_to_recover<=0){this.inf=false; this.time_to_recover--; fill(255,255,0);} 
+    
+    // keeps decreasing the recovery-time to return it healthy.
+    if (this.time_to_recover<=-1000) {
+      this.healthy=true;
+      fill(0, 255, 0);
+    }
+    
    // if ball is moving change x ,y to simulate motion
     if(this.movee){
     this.x+=this.speedx;
